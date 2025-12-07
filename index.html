@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+
+<script src="https://tvradiozap.eu/js/open60.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video-js.min.css" rel="stylesheet">
+
+<!-- alternatives avec N°de version. ENLEVER .min pour fichier non compressés
+enlevé du head suite pb avec youtube : <meta name="referrer" content="no-referrer">
+<link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet"> -->
+
+<!-- alternatives locales pour dépannage
+<script src="https://tvradiozap.eu/js/video-8.22.0.js"></script>
+<link href="https://tvradiozap.eu/css/videojs-8.22.0.css" rel="stylesheet">-->
+
+
+<!-- Nécessaires pour affichage des temps, ainsi qu'options player 'currentTimeDisplay', 'timeDivider', 'durationDisplay' à mettre à true
+.vjs-current-time {
+  display: inline-block !important;
+}
+.vjs-time-divider {
+  display: inline-block !important;
+}
+.vjs-duration {
+  display: inline-block !important;
+}
+-->
+<style type="text/css">
+html {overflow: hidden;}
+body {background:black;padding:0;margin:0;}
+
+#tvrzInfos, #tvrzQuals {font-size:4.5cqw;}	/*boutons d'ouverture de info tech et qualité */
+
+#tvrzInfoContainer, #tvrzQualContainer {display:none; font-size: 2.8cqw; z-index:999999;position:absolute; margin-left:-300%;right:0;
+				padding:7px;outline:1px solid black;}
+				
+#tvrzInfoContainer {bottom:140%; text-align:left; color:black; border-radius: 10px; opacity:0.75; background:lightgrey; }
+#tvrzQualContainer {bottom:100%; text-align:right; color:white; cursor: pointer; background:rgba(70, 70, 70, 0.7);}
+
+#tvrzQualContainer > * {padding:3px;} 
+#tvrzQualContainer > *:not(:first-child):hover {background:grey;}
+	
+#video1{
+	object-position: center;
+	width: 100%;
+}
+
+
+.video-js .vjs-progress-control {
+    position:absolute;
+    width: calc(100% - 25px);
+    top:-10px;
+	left:0;
+    height:3px; /* à ajuster pour que barre suffisamment haute n'est pas d'interférence sur click d'éléments au-dessous */
+    background-color: #2B333F;
+    background-color: rgba(43, 51, 63, 0.7);
+}
+.video-js .vjs-progress-holder {
+    position:absolute;
+    margin:0px;
+    top:0%;
+    width:100%;
+}
+
+.vjs-control-bar {font-size: 2.5cqw;}	/*taille semi-proportionnelle à écran*/
+.video-js .vjs-control {flex:1};
+
+/* correction de la barre de volume, suite à flex:1 dnas .video-js .vjs-control */
+.vjs-volume-panel {margin-right:-1em !important;}
+.vjs-volume-vertical {margin-left:1.5em !important;	margin-right:-1.5em !important;}
+
+.vjs-text-track-display div {
+  font-size: 4cqw !important;
+}
+
+/*bouton "LIVE" trop grand */
+.vjs-seek-to-live-text{font-stretch: condensed !important; font-size:smaller !important;}
+
+/* aspect-ratio en audio. videojs met padding-top:56.25% pour du 16/9 par la class : .video2-dimensions.vjs-fluid:not(.vjs-audio-only-mode)*/
+body[data-av="audio"] #video1 {padding-top:25%;} 	/*25% pour 4/1, 20% pour 5/1... */
+
+
+</style>
+
+</head>
+
+
+<body>
+	<video id="video1" class="video-js" class="vjs-default-skin" poster="/im/tvrzPoster.gif" controls></video>
+	
+<!--	<source src="https://tvradiozap.eu/index.php/640" type="video/mp4">
+		<source src="https://icecast.radiofrance.fr/franceculture-hifi.aac">
+		<source src="https://artesimulcast.akamaized.net/hls/live/2031003-b/artelive_fr/master_v720.m3u8" type="application/x-mpegURL">
+		<source src="https://tv7.live-kd.com/live/tv7/ngrp:tv7_Wifi/manifest.mpd" type="application/dash+xml">
+	<script src="/js/jsplay53.js"></script> -->
+	
+<template>
+	<div>ℚ<div id="tvrzQualContainer" tabindex="100" onclick="event.preventDefault();event.stopPropagation();setQualityLevel(event.target.id);"><div><span style="margin:auto; font-weight:700;">Qualités</span><br></div><div>✔Auto</div></div></div>
+	
+	<div>🛈<div id="tvrzInfoContainer"><div><span style="margin:auto; font-weight:700;">Infos techniques</span><br><br></div></div></div>
+</template>
+
+
+<script src="https://tvradiozap.eu/js/play60.js"></script>
+
+</body>
+</html>
