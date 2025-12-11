@@ -85,14 +85,52 @@ body[data-av="audio"] #video1 {padding-top:25%;} 	/*25% pour 4/1, 20% pour 5/1..
 
 
 </style>
-
+<style>
+    .vjs-has-started .vjs-control-bar, .vjs-audio-only-mode .vjs-control-bar {
+  display: flex;
+  visibility: hidden;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s;
+}
+    
+    html, body { height: 100%; margin: 0; background: #000; overflow: hidden; }
+    /* occupe 100% de l'iframe/overlay */
+    #player { width: 100%; height: 100%; }
+    /* neutralise le ratio par défaut pour un vrai fill */
+    .vjs-fluid { padding-top: 0 !important; }
+  </style>
 </head>
 
 
 <body>
-	<video id="video1" class="video-js" class="vjs-default-skin" poster="/im/tvrzPoster.gif" controls></video>
 	
-<!--	<source src="https://tvradiozap.eu/index.php/640" type="video/mp4">
+	
+	
+
+<body>
+  <video id="video1"
+         class="video-js vjs-fill vjs-big-play-centered"
+         controls
+         playsinline
+         autoplay
+         preload="auto"></video>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--	<video id="video1" class="video-js" class="vjs-default-skin" poster="/im/tvrzPoster.gif" controls></video>
+	
+<source src="https://tvradiozap.eu/index.php/640" type="video/mp4">
 		<source src="https://icecast.radiofrance.fr/franceculture-hifi.aac">
 		<source src="https://artesimulcast.akamaized.net/hls/live/2031003-b/artelive_fr/master_v720.m3u8" type="application/x-mpegURL">
 		<source src="https://tv7.live-kd.com/live/tv7/ngrp:tv7_Wifi/manifest.mpd" type="application/dash+xml">
